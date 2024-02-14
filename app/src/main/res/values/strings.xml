@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Walka ze smokiem</string>
+    <string name="app_title">Gra Smok</string>
+    <string name="editFieldHint">Podaj liczbę od 0 do 100</string>
+    <string name="buttonHint">Graj!</string>
 </resources>

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     if (guessedNumber == randomNumber) {
                         showAlertDialog("Wygrałeś!");
                     } else {
-                        showAlertDialog("Przegrałeś!");
+                        showAlertDialog("Przegrałeś! Poprawną liczbą było " + randomNumber);
                     }
                 }
             }
