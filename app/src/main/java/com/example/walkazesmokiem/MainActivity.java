@@ -8,7 +8,9 @@ import android.widget.EditText;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
+    private int lives = 3;
+    private Random rand = new Random();
+    private int randomNumber = rand.nextInt(100);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,25 +18,35 @@ public class MainActivity extends AppCompatActivity {
 
         EditText editText = findViewById(R.id.editTextNumber);
         Button button = findViewById(R.id.button);
-        Random rand = new Random();
 
         button.setOnClickListener(view -> {
-            String test = editText.getText().toString();
+            if (lives > 0) {
+                String test = editText.getText().toString();
 
-            if (test.isEmpty()){
-                showAlertDialog("Wprowadź liczbę aby zagrać!");
-            } else {
-                int guessedNumber = Integer.parseInt(test);
-                if (guessedNumber > 100 || guessedNumber < 0) {
-                    showAlertDialog("Wprowadź poprawną liczbę!");
+                if (test.isEmpty()) {
+                    showAlertDialog("Wprowadź liczbę aby zagrać!");
                 } else {
-                    int randomNumber = rand.nextInt(100);
-                    if (guessedNumber == randomNumber) {
-                        showAlertDialog("Wygrałeś!");
+                    int guessedNumber = Integer.parseInt(test);
+                    if (guessedNumber > 100 || guessedNumber < 0) {
+                        showAlertDialog("Wprowadź poprawną liczbę!");
                     } else {
-                        showAlertDialog("Przegrałeś! Poprawną liczbą było " + randomNumber);
+
+                        if (guessedNumber == randomNumber) {
+                            showAlertDialog("Wygrałeś!");
+                        } else {
+                            lives--;
+                            if (lives > 0) {
+                                showAlertDialog("Przegrałeś! Pozostało " + lives + " żyć.");
+                            } else {
+                                lives = 3;
+                                showAlertDialog("Przegrałeś! Skończyły się życia. Poprawną liczbą było " + randomNumber);
+                                randomNumber = rand.nextInt(100);
+                            }
+                        }
                     }
                 }
+            } else {
+                showAlertDialog("Przegrałeś! Skończyły się życia.");
             }
         });
     }
