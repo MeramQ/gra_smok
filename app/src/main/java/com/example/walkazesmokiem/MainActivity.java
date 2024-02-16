@@ -36,7 +36,12 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             lives--;
                             if (lives > 0) {
-                                showAlertDialog("Przegrałeś! Pozostało " + lives + " żyć.");
+                                if (guessedNumber > randomNumber){
+                                    showAlertDialog("Przegrałeś! Poprawna liczba jest mniejsza niż odgadnięta.\nPozostało " + lives + " żyć.");
+                                } else {
+                                    showAlertDialog("Przegrałeś! Poprawna liczba jest większa niż odgadnięta.\nPozostało " + lives + " żyć.");
+                                }
+
                             } else {
                                 lives = 3;
                                 showAlertDialog("Przegrałeś! Skończyły się życia. Poprawną liczbą było " + randomNumber);
